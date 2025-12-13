@@ -1,0 +1,67 @@
+.datetime-range-wrapper {
+    position: relative;
+    min-width: 240px;
+}
+.datetime-range-trigger {
+    width: 100%;
+    padding: 6px 20px 6px 20px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    background: #fff;
+    cursor: pointer;
+    text-align: left;
+    color: #495057;
+}
+.datetime-range-trigger:hover {
+    border-color: #80bdff;
+}
+.datetime-range-trigger.has-value {
+    color: #212529;
+    font-weight: 500;
+}
+.datetime-range-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    padding: 12px;
+    margin-top: 4px;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+.datetime-range-dropdown.open {
+    display: block;
+}
+.datetime-range-dropdown-title {
+    font-weight: 600;
+    font-size: 15px;
+}
+.datetime-range-dropdown label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 4px;
+}
+.datetime-range-dropdown hr {
+    margin-top: 0.4rem;
+    margin-bottom: 0.4rem;
+}
+.datetime-range-dropdown input[type="datetime-local"] {
+    width: 100%;
+    padding: 6px 8px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+.datetime-range-dropdown input[type="datetime-local"]:focus {
+    border-color: #80bdff;
+    outline: none;
+}
+
+

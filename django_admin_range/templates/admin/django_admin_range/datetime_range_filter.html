@@ -1,0 +1,56 @@
+{% load i18n %}
+{% load static %}
+
+<script>
+if (!window.datetimeRangeFilterLoaded) {
+    window.datetimeRangeFilterLoaded = true;
+    const script = document.createElement('script');
+    script.src = '{% static "django_admin_range/js/datetime_range_filter.js" %}';
+    document.head.appendChild(script);
+
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = '{% static "django_admin_range/css/datetime_range_filter.css" %}';
+    document.head.appendChild(link);
+}
+</script>
+
+{% for choice in choices %}
+<div class="form-group datetime-range-wrapper" id="dt_wrapper_{{ choice.field_name }}">
+    <button type="button"
+            class="datetime-range-trigger {% if choice.datetime_gte or choice.datetime_lte %}has-value{% endif %}"
+            onclick="toggleDatetimeDropdown('{{ choice.field_name }}')">
+        {% if choice.datetime_gte and choice.datetime_lte %}
+            {{ choice.datetime_gte_display }} - {{ choice.datetime_lte_display }}
+        {% elif choice.datetime_gte %}
+            {{ choice.datetime_gte_display }} - ...
+        {% elif choice.datetime_lte %}
+            ... - {{ choice.datetime_lte_display }}
+        {% else %}
+            {{ choice.title }}
+        {% endif %}
+    </button>
+
+    <div class="datetime-range-dropdown" id="dt_dropdown_{{ choice.field_name }}">
+        <div class="datetime-range-dropdown-title">
+            {{ choice.title }}
+        </div>
+        <hr>
+        <label for="datetime_gte_{{ choice.field_name }}">{% trans "Bu tarixdən" %}</label>
+        <input type="datetime-local"
+               id="datetime_gte_{{ choice.field_name }}"
+               value="{{ choice.datetime_gte }}"
+               name="{{ choice.field_name }}__gte">
+
+        <label for="datetime_lte_{{ choice.field_name }}">{% trans "Bu tarixədək" %}</label>
+        <input type="datetime-local"
+               id="datetime_lte_{{ choice.field_name }}"
+               value="{{ choice.datetime_lte }}"
+               name="{{ choice.field_name }}__lte">
+
+        <button type="button" class="btn btn-secondary" onclick="clearDatetimeFilter('{{ choice.field_name }}')">
+            {% trans "Təmizlə" %}
+        </button>
+    </div>
+</div>
+{% endfor %}
