@@ -36,20 +36,20 @@ if (!window.datetimeRangeFilterLoaded) {
             {{ choice.title }}
         </div>
         <hr>
-        <label for="datetime_gte_{{ choice.field_name }}">{% trans "Bu tarixdən" %}</label>
+        <label for="datetime_gte_{{ choice.field_name }}">{% trans "From" %}</label>
         <input type="datetime-local"
                id="datetime_gte_{{ choice.field_name }}"
                value="{{ choice.datetime_gte }}"
                name="{{ choice.field_name }}__gte">
 
-        <label for="datetime_lte_{{ choice.field_name }}">{% trans "Bu tarixədək" %}</label>
+        <label for="datetime_lte_{{ choice.field_name }}">{% trans "To" %}</label>
         <input type="datetime-local"
                id="datetime_lte_{{ choice.field_name }}"
                value="{{ choice.datetime_lte }}"
                name="{{ choice.field_name }}__lte">
 
         <button type="button" class="btn btn-secondary" onclick="clearDatetimeFilter('{{ choice.field_name }}')">
-            {% trans "Təmizlə" %}
+            {% trans "Clear" %}
         </button>
     </div>
 </div>

@@ -36,20 +36,20 @@ if (!window.dateRangeFilterLoaded) {
             {{ choice.title }}
         </div>
         <hr>
-        <label for="date_gte_{{ choice.field_name }}">{% trans "Bu tarixdən" %}</label>
+        <label for="date_gte_{{ choice.field_name }}">{% trans "From" %}</label>
         <input type="date" 
                id="date_gte_{{ choice.field_name }}"
                value="{{ choice.date_gte }}"
                name="{{ choice.field_name }}__gte">
         
-        <label for="date_lte_{{ choice.field_name }}">{% trans "Bu tarixədək" %}</label>
+        <label for="date_lte_{{ choice.field_name }}">{% trans "To" %}</label>
         <input type="date" 
                id="date_lte_{{ choice.field_name }}"
                value="{{ choice.date_lte }}"
                name="{{ choice.field_name }}__lte">
 
         <button type="button" class="btn btn-secondary" onclick="clearDateFilter('{{ choice.field_name }}')">
-            {% trans "Təmizlə" %}
+            {% trans "Clear" %}
         </button>
     </div>
 </div>

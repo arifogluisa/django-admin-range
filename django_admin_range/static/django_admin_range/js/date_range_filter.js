@@ -1,7 +1,6 @@
-
 function toggleDateDropdown(fieldName) {
-    var dropdown = document.getElementById('dropdown_' + fieldName);
-    var allDropdowns = document.querySelectorAll('.date-range-dropdown');
+    const dropdown = document.getElementById('dropdown_' + fieldName);
+    const allDropdowns = document.querySelectorAll('.date-range-dropdown');
     
     allDropdowns.forEach(function(d) {
         if (d.id !== 'dropdown_' + fieldName) {

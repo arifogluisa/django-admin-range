@@ -36,14 +36,14 @@ if (!window.numericRangeFilterLoaded) {
             {{ choice.title }}
         </div>
         <hr>
-        <label for="num_gte_{{ choice.field_name }}">{% trans "Minimal dəyər" %}</label>
+        <label for="num_gte_{{ choice.field_name }}">{% trans "From" %}</label>
         <input type="number"
                id="num_gte_{{ choice.field_name }}"
                value="{{ choice.num_gte }}"
                name="{{ choice.field_name }}__gte"
                step="any">
 
-        <label for="num_lte_{{ choice.field_name }}">{% trans "Maksimal dəyər" %}</label>
+        <label for="num_lte_{{ choice.field_name }}">{% trans "To" %}</label>
         <input type="number"
                id="num_lte_{{ choice.field_name }}"
                value="{{ choice.num_lte }}"
@@ -51,7 +51,7 @@ if (!window.numericRangeFilterLoaded) {
                step="any">
 
         <button type="button" class="btn btn-secondary" onclick="clearNumericFilter('{{ choice.field_name }}')">
-            {% trans "Təmizlə" %}
+            {% trans "Clear" %}
         </button>
     </div>
 </div>

@@ -1,5 +1,3 @@
-[![Published on Django Packages](https://img.shields.io/badge/Published%20on-Django%20Packages-0c3c26)](https://djangopackages.org/packages/p/django-admin-range/)
-
 # django-admin-range
 
 Reuseable date, datetime, and numeric range filters for Django admin. Install the package and drop the filters straight into `list_filter` — the templates, CSS, and JS are bundled so you do not have to wire up static files manually.

@@ -110,5 +110,3 @@ document.addEventListener('DOMContentLoaded', function () {
         sync();
     });
 });
-
-
