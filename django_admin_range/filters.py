@@ -1,3 +1,4 @@
+import contextlib
 from datetime import datetime
 from decimal import Decimal, InvalidOperation
 from typing import Union
@@ -11,7 +12,7 @@ from django.utils import timezone
 
 class DateRangeFilter(admin.SimpleListFilter):
     """
-    A custom date range filter compatible with Django 5.x
+    A custom date range filter
     """
 
     template = "admin/django_admin_range/date_range_filter.html"
@@ -74,24 +75,18 @@ class DateRangeFilter(admin.SimpleListFilter):
         filters = {}
 
         if self.date_gte:
-            try:
+            with contextlib.suppress(ValueError, TypeError):
                 date_gte = self._parse_date(self.date_gte)
                 if date_gte:
                     filters[f"{self.field_name}__gte"] = date_gte
-            except (ValueError, TypeError):
-                pass
 
         if self.date_lte:
-            try:
+            with contextlib.suppress(ValueError, TypeError):
                 date_lte = self._parse_date(self.date_lte)
                 if date_lte:
                     filters[f"{self.field_name}__lte"] = date_lte
-            except (ValueError, TypeError):
-                pass
 
-        if filters:
-            return queryset.filter(**filters)
-        return queryset
+        return queryset.filter(**filters) if filters else queryset
 
     def _parse_date(self, date_string):
         """Parse date string to date object"""
@@ -144,6 +139,9 @@ def date_range_filter(field_name: str, title: Union[str, None] = None):
         list_filter = (
             date_range_filter('created_at', 'Creation Date'),
         )
+    Note:
+        The field must be a DateField. And second argument is optional.
+        If you don't provide the title, it will try to use the field verbose_name or the field name as the title.
     """
 
     class DateRangeFilterWrapper(DateRangeFilter):
@@ -154,12 +152,12 @@ def date_range_filter(field_name: str, title: Union[str, None] = None):
             field = None
             try:
                 field = model._meta.get_field(field_name)
-            except FieldDoesNotExist:
+            except FieldDoesNotExist as e:
                 raise FieldDoesNotExist(
                     f"date_range_filter: {model.__name__} model does not have field '{field_name}'"
-                )
+                ) from e
             except Exception as e:
-                raise Exception(f"date_range_filter: unexpected error: {e}")
+                raise RuntimeError(f"date_range_filter: unexpected error: {e}") from e
 
             if not isinstance(field, (models.DateField)):
                 raise TypeError(
@@ -255,9 +253,7 @@ class DateTimeRangeFilter(admin.SimpleListFilter):
         if self.parsed_datetime_lte:
             filters[f"{self.field_name}__lte"] = self.parsed_datetime_lte
 
-        if filters:
-            return queryset.filter(**filters)
-        return queryset
+        return queryset.filter(**filters) if filters else queryset
 
     def _make_dt_aware(self, value: datetime):
         """
@@ -352,6 +348,13 @@ class DateTimeRangeFilter(admin.SimpleListFilter):
 def datetime_range_filter(field_name: str, title: Union[str, None] = None):
     """
     Factory for DateTimeRangeFilter bound to a specific DateTimeField.
+    Usage:
+        list_filter = (
+            datetime_range_filter('created_at', 'Creation Date'),
+        )
+    Note:
+        The field must be a DateTimeField. And second argument is optional.
+        If you don't provide the title, it will try to use the field verbose_name or the field name as the title.
     """
 
     class DateTimeRangeFilterWrapper(DateTimeRangeFilter):
@@ -361,12 +364,14 @@ def datetime_range_filter(field_name: str, title: Union[str, None] = None):
             field = None
             try:
                 field = model._meta.get_field(field_name)
-            except FieldDoesNotExist:
+            except FieldDoesNotExist as e:
                 raise FieldDoesNotExist(
                     f"datetime_range_filter: {model.__name__} model does not have field '{field_name}'"
-                )
+                ) from e
             except Exception as e:
-                raise Exception(f"datetime_range_filter: unexpected error: {e}")
+                raise RuntimeError(
+                    f"datetime_range_filter: unexpected error: {e}"
+                ) from e
 
             if not isinstance(field, models.DateTimeField):
                 raise TypeError(
@@ -450,9 +455,7 @@ class NumericRangeFilter(admin.SimpleListFilter):
             filters[f"{self.field_name}__gte"] = self.parsed_num_gte
         if self.parsed_num_lte is not None:
             filters[f"{self.field_name}__lte"] = self.parsed_num_lte
-        if filters:
-            return queryset.filter(**filters)
-        return queryset
+        return queryset.filter(**filters) if filters else queryset
 
     def _parse_number(self, value):
         """
@@ -495,6 +498,13 @@ class NumericRangeFilter(admin.SimpleListFilter):
 def numeric_range_filter(field_name: str, title: Union[str, None] = None):
     """
     Factory for NumericRangeFilter bound to a numeric field.
+    Usage:
+        list_filter = (
+            numeric_range_filter('price', 'Price'),
+        )
+    Note:
+        The field must be a numeric field (IntegerField, FloatField, DecimalField). And second argument is optional.
+        If you don't provide the title, it will try to use the field verbose_name or the field name as the title.
     """
 
     class NumericRangeFilterWrapper(NumericRangeFilter):
@@ -504,12 +514,14 @@ def numeric_range_filter(field_name: str, title: Union[str, None] = None):
             field = None
             try:
                 field = model._meta.get_field(field_name)
-            except FieldDoesNotExist:
+            except FieldDoesNotExist as e:
                 raise FieldDoesNotExist(
                     f"numeric_range_filter: {model.__name__} model does not have field '{field_name}'"
-                )
+                ) from e
             except Exception as e:
-                raise Exception(f"numeric_range_filter: unexpected error: {e}")
+                raise RuntimeError(
+                    f"numeric_range_filter: unexpected error: {e}"
+                ) from e
 
             numeric_fields = (
                 models.IntegerField,

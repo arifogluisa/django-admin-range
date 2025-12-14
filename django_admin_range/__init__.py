@@ -22,4 +22,3 @@ __all__ = [
 
 # Django < 3.2 compatibility
 default_app_config = "django_admin_range.apps.DjangoAdminRangeConfig"
-
