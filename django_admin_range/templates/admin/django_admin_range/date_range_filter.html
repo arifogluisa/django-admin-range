@@ -2,24 +2,25 @@
 {% load static %}
 
 <script>
-if (!window.dateRangeFilterLoaded) {
-    window.dateRangeFilterLoaded = true;
+if (!window.RangeFilterFilesLoaded) {
+    console.log('baglandi date icindekidi date');
+    window.RangeFilterFilesLoaded = true;
     const script = document.createElement('script');
-    script.src = '{% static "django_admin_range/js/date_range_filter.js" %}';
+    script.src = '{% static "django_admin_range/js/range_filter.js" %}';
     document.head.appendChild(script);
 
     const link = document.createElement('link');
     link.rel = 'stylesheet';
-    link.href = '{% static "django_admin_range/css/date_range_filter.css" %}';
+    link.href = '{% static "django_admin_range/css/range_filter.css" %}';
     document.head.appendChild(link);
 }
 </script>
 
 {% for choice in choices %}
-<div class="form-group date-range-wrapper" id="wrapper_{{ choice.field_name }}">
+<div class="form-group range-filter-wrapper" style="min-width: 200px;" id="wrapper_{{ choice.field_name }}">
     <button type="button" 
-            class="date-range-trigger {% if choice.date_gte or choice.date_lte %}has-value{% endif %}"
-            onclick="toggleDateDropdown('{{ choice.field_name }}')">
+            class="range-filter-trigger {% if choice.date_gte or choice.date_lte %}has-value{% endif %}"
+            onclick="toggleRangeFilterDropdown('{{ choice.field_name }}')">
         {% if choice.date_gte and choice.date_lte %}
             {{ choice.date_gte }} - {{ choice.date_lte }}
         {% elif choice.date_gte %}
@@ -31,25 +32,23 @@ if (!window.dateRangeFilterLoaded) {
         {% endif %}
     </button>
 
-    <div class="date-range-dropdown" id="dropdown_{{ choice.field_name }}">
-        <div class="date-range-dropdown-title">
+    <div class="range-filter-dropdown" id="dropdown_{{ choice.field_name }}">
+        <div class="range-filter-dropdown-title">
             {{ choice.title }}
         </div>
         <hr>
-        <label for="date_gte_{{ choice.field_name }}">{% trans "From" %}</label>
-        <input type="date" 
-               id="date_gte_{{ choice.field_name }}"
-               value="{{ choice.date_gte }}"
-               name="{{ choice.field_name }}__gte">
-        
-        <label for="date_lte_{{ choice.field_name }}">{% trans "To" %}</label>
-        <input type="date" 
-               id="date_lte_{{ choice.field_name }}"
-               value="{{ choice.date_lte }}"
-               name="{{ choice.field_name }}__lte">
+        <label for="field_gte_{{ choice.field_name }}">{% trans "Bu tarixdən" %}</label>
+        <input type="date"
+               id="field_gte_{{ choice.field_name }}"
+               value="{{ choice.date_gte }}">
 
-        <button type="button" class="btn btn-secondary" onclick="clearDateFilter('{{ choice.field_name }}')">
-            {% trans "Clear" %}
+        <label for="field_lte_{{ choice.field_name }}">{% trans "Bu tarixədək" %}</label>
+        <input type="date"
+               id="field_lte_{{ choice.field_name }}"
+               value="{{ choice.date_lte }}">
+
+        <button type="button" class="btn btn-secondary" onclick="clearRangeFilter('{{ choice.field_name }}')">
+            {% trans "Təmizlə" %}
         </button>
     </div>
 </div>

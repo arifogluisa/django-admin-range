@@ -2,24 +2,25 @@
 {% load static %}
 
 <script>
-if (!window.numericRangeFilterLoaded) {
-    window.numericRangeFilterLoaded = true;
-    const script = document.createElement('script');
-    script.src = '{% static "django_admin_range/js/numeric_range_filter.js" %}';
-    document.head.appendChild(script);
-
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = '{% static "django_admin_range/css/numeric_range_filter.css" %}';
-    document.head.appendChild(link);
-}
+    if (!window.RangeFilterFilesLoaded) {
+        window.RangeFilterFilesLoaded = true;
+        const script = document.createElement('script');
+        script.src = '{% static "django_admin_range/js/range_filter.js" %}';
+        document.head.appendChild(script);
+    
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = '{% static "django_admin_range/css/range_filter.css" %}';
+        document.head.appendChild(link);
+    }
 </script>
 
 {% for choice in choices %}
-<div class="form-group numeric-range-wrapper" id="num_wrapper_{{ choice.field_name }}">
+<div class="form-group range-filter-wrapper" style="min-width: 200px;" id="wrapper_{{ choice.field_name }}">
     <button type="button"
-            class="numeric-range-trigger {% if choice.num_gte or choice.num_lte %}has-value{% endif %}"
-            onclick="toggleNumericDropdown('{{ choice.field_name }}')">
+            style="padding: 6px 8px 6px 20px !important;"
+            class="range-filter-trigger {% if choice.num_gte or choice.num_lte %}has-value{% endif %}"
+            onclick="toggleRangeFilterDropdown('{{ choice.field_name }}')">
         {% if choice.num_gte and choice.num_lte %}
             {{ choice.num_gte_display }} - {{ choice.num_lte_display }}
         {% elif choice.num_gte %}
@@ -31,27 +32,25 @@ if (!window.numericRangeFilterLoaded) {
         {% endif %}
     </button>
 
-    <div class="numeric-range-dropdown" id="num_dropdown_{{ choice.field_name }}">
-        <div class="numeric-range-dropdown-title">
+    <div class="range-filter-dropdown" id="dropdown_{{ choice.field_name }}">
+        <div class="range-filter-dropdown-title">
             {{ choice.title }}
         </div>
         <hr>
-        <label for="num_gte_{{ choice.field_name }}">{% trans "From" %}</label>
+        <label for="field_gte_{{ choice.field_name }}">{% trans "Minimal dəyər" %}</label>
         <input type="number"
-               id="num_gte_{{ choice.field_name }}"
+               id="field_gte_{{ choice.field_name }}"
                value="{{ choice.num_gte }}"
-               name="{{ choice.field_name }}__gte"
                step="any">
 
-        <label for="num_lte_{{ choice.field_name }}">{% trans "To" %}</label>
+        <label for="field_lte_{{ choice.field_name }}">{% trans "Maksimal dəyər" %}</label>
         <input type="number"
-               id="num_lte_{{ choice.field_name }}"
+               id="field_lte_{{ choice.field_name }}"
                value="{{ choice.num_lte }}"
-               name="{{ choice.field_name }}__lte"
                step="any">
 
-        <button type="button" class="btn btn-secondary" onclick="clearNumericFilter('{{ choice.field_name }}')">
-            {% trans "Clear" %}
+        <button type="button" class="btn btn-secondary" onclick="clearRangeFilter('{{ choice.field_name }}')">
+            {% trans "Təmizlə" %}
         </button>
     </div>
 </div>

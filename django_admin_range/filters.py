@@ -71,7 +71,7 @@ class DateRangeFilter(admin.SimpleListFilter):
     def lookups(self, request, model_admin):
         return ()
 
-    def queryset(self, request, queryset):
+    def queryset(self, request, queryset):  # sourcery skip: use-named-expression
         filters = {}
 
         if self.date_gte:

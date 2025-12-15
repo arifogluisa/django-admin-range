@@ -2,24 +2,24 @@
 {% load static %}
 
 <script>
-if (!window.datetimeRangeFilterLoaded) {
-    window.datetimeRangeFilterLoaded = true;
-    const script = document.createElement('script');
-    script.src = '{% static "django_admin_range/js/datetime_range_filter.js" %}';
-    document.head.appendChild(script);
-
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = '{% static "django_admin_range/css/datetime_range_filter.css" %}';
-    document.head.appendChild(link);
-}
+    if (!window.RangeFilterFilesLoaded) {
+        window.RangeFilterFilesLoaded = true;
+        const script = document.createElement('script');
+        script.src = '{% static "django_admin_range/js/range_filter.js" %}';
+        document.head.appendChild(script);
+    
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = '{% static "django_admin_range/css/range_filter.css" %}';
+        document.head.appendChild(link);
+    }
 </script>
 
 {% for choice in choices %}
-<div class="form-group datetime-range-wrapper" id="dt_wrapper_{{ choice.field_name }}">
+<div class="form-group range-filter-wrapper" style="min-width: 240px;" id="wrapper_{{ choice.field_name }}">
     <button type="button"
-            class="datetime-range-trigger {% if choice.datetime_gte or choice.datetime_lte %}has-value{% endif %}"
-            onclick="toggleDatetimeDropdown('{{ choice.field_name }}')">
+            class="range-filter-trigger {% if choice.datetime_gte or choice.datetime_lte %}has-value{% endif %}"
+            onclick="toggleRangeFilterDropdown('{{ choice.field_name }}')">
         {% if choice.datetime_gte and choice.datetime_lte %}
             {{ choice.datetime_gte_display }} - {{ choice.datetime_lte_display }}
         {% elif choice.datetime_gte %}
@@ -31,25 +31,23 @@ if (!window.datetimeRangeFilterLoaded) {
         {% endif %}
     </button>
 
-    <div class="datetime-range-dropdown" id="dt_dropdown_{{ choice.field_name }}">
-        <div class="datetime-range-dropdown-title">
+    <div class="range-filter-dropdown" id="dropdown_{{ choice.field_name }}">
+        <div class="range-filter-dropdown-title">
             {{ choice.title }}
         </div>
         <hr>
-        <label for="datetime_gte_{{ choice.field_name }}">{% trans "From" %}</label>
+        <label for="field_gte_{{ choice.field_name }}">{% trans "Bu tarixdən" %}</label>
         <input type="datetime-local"
-               id="datetime_gte_{{ choice.field_name }}"
-               value="{{ choice.datetime_gte }}"
-               name="{{ choice.field_name }}__gte">
+               id="field_gte_{{ choice.field_name }}"
+               value="{{ choice.datetime_gte }}">
 
-        <label for="datetime_lte_{{ choice.field_name }}">{% trans "To" %}</label>
+        <label for="field_lte_{{ choice.field_name }}">{% trans "Bu tarixədək" %}</label>
         <input type="datetime-local"
-               id="datetime_lte_{{ choice.field_name }}"
-               value="{{ choice.datetime_lte }}"
-               name="{{ choice.field_name }}__lte">
+               id="field_lte_{{ choice.field_name }}"
+               value="{{ choice.datetime_lte }}">
 
-        <button type="button" class="btn btn-secondary" onclick="clearDatetimeFilter('{{ choice.field_name }}')">
-            {% trans "Clear" %}
+        <button type="button" class="btn btn-secondary" onclick="clearRangeFilter('{{ choice.field_name }}')">
+            {% trans "Təmizlə" %}
         </button>
     </div>
 </div>

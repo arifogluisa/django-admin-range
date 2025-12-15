@@ -1,8 +1,7 @@
-.datetime-range-wrapper {
+.range-filter-wrapper {
     position: relative;
-    min-width: 240px;
 }
-.datetime-range-trigger {
+.range-filter-trigger {
     width: 100%;
     padding: 6px 20px 6px 20px;
     border: 1px solid #ced4da;
@@ -12,14 +11,14 @@
     text-align: left;
     color: #495057;
 }
-.datetime-range-trigger:hover {
+.range-filter-trigger:hover {
     border-color: #80bdff;
 }
-.datetime-range-trigger.has-value {
+.range-filter-trigger.has-value {
     color: #212529;
     font-weight: 500;
 }
-.datetime-range-dropdown {
+.range-filter-dropdown {
     display: none;
     position: absolute;
     top: 100%;
@@ -33,25 +32,25 @@
     z-index: 1000;
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
-.datetime-range-dropdown.open {
+.range-filter-dropdown.open {
     display: block;
 }
-.datetime-range-dropdown-title {
+.range-filter-dropdown-title {
     font-weight: 600;
     font-size: 15px;
 }
-.datetime-range-dropdown label {
+.range-filter-dropdown label {
     display: block;
     font-size: 12px;
     font-weight: 600;
     color: #495057;
     margin-bottom: 4px;
 }
-.datetime-range-dropdown hr {
+.range-filter-dropdown hr {
     margin-top: 0.4rem;
     margin-bottom: 0.4rem;
 }
-.datetime-range-dropdown input[type="datetime-local"] {
+.range-filter-dropdown input {
     width: 100%;
     padding: 6px 8px;
     border: 1px solid #ced4da;
@@ -59,9 +58,7 @@
     font-size: 13px;
     margin-bottom: 10px;
 }
-.datetime-range-dropdown input[type="datetime-local"]:focus {
+.range-filter-dropdown input:focus {
     border-color: #80bdff;
     outline: none;
 }
-
-
