@@ -3,6 +3,17 @@
 Reuseable date, datetime, and numeric range filters for Django admin. Install the package and drop the filters straight into `list_filter` — the templates, CSS, and JS are bundled so you do not have to wire up static files manually.
 
 
+## Examples
+
+### Default Django Admin
+![Django Default Admin](https://raw.githubusercontent.com/arifogluisa/django-admin-range/refs/heads/master/docs/images/django-default.gif)
+
+### Jazzmin Theme
+![Jazzmin Theme](https://raw.githubusercontent.com/arifogluisa/django-admin-range/refs/heads/master/docs/images/jazzmin.gif)
+
+### Grappelli Theme
+![Grappelli Theme](https://raw.githubusercontent.com/arifogluisa/django-admin-range/refs/heads/master/docs/images/grapelli.gif)
+
 ## Installation
 
 ```bash

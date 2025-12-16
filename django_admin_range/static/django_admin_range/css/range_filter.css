@@ -1,132 +1,133 @@
 .range-filter-wrapper {
-    position: relative;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    min-width: 200px;
+  position: relative;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  min-width: 200px;
 }
 
 :has(#search_group) .range-filter-wrapper {
-    margin-top: auto;
-    margin-bottom: .5em;
+  margin-top: auto;
+  margin-bottom: 0.5em;
 }
 
 .range-filter-trigger {
-    width: 100%;
-    padding: 6px 20px 6px 20px;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-    background: #fff;
-    cursor: pointer;
-    text-align: left;
-    color: #495057;
+  width: 100%;
+  padding: 6px 20px 6px 20px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+  text-align: left;
+  color: #495057;
 }
 .range-filter-trigger:hover {
-    border-color: #80bdff;
+  border-color: #80bdff;
 }
 .range-filter-trigger.has-value {
-    color: #212529;
-    font-weight: 500;
+  color: #212529;
+  font-weight: 500;
 }
 .range-filter-dropdown {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: #fff;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-    padding: 12px;
-    margin-top: 4px;
-    z-index: 1000;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  padding: 12px;
+  margin-top: 4px;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 .range-filter-dropdown.open {
-    display: block;
+  display: block;
 }
 .range-filter-dropdown-title {
-    font-weight: 600;
-    font-size: 15px;
+  font-weight: 600;
+  font-size: 15px;
 }
 .range-filter-dropdown label {
-    display: block;
-    font-size: 12px;
-    font-weight: 600;
-    color: #495057;
-    margin-bottom: 4px;
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #495057;
+  margin-bottom: 4px;
 }
 .range-filter-dropdown hr {
-    margin-top: 0.4rem;
-    margin-bottom: 0.4rem;
+  margin-top: 0.4rem;
+  margin-bottom: 0.4rem;
 }
 .range-filter-dropdown input {
-    box-sizing: border-box;
-    width: 100%;
-    padding: 6px 8px;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-    font-size: 13px;
-    margin-bottom: 10px;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  font-size: 13px;
+  margin-bottom: 10px;
 }
 .range-filter-dropdown input:focus {
-    border-color: #80bdff;
-    outline: none;
+  border-color: #80bdff;
+  outline: none;
 }
 
 .range-filter-btn {
-    display: inline-block;
-    font-weight: 400;
-    text-align: center;
-    vertical-align: middle;
-    user-select: none;
-    font-size: 1rem;
-    border-width: 1px;
-    border-style: solid;
-    padding: 0.375rem 0.75rem;
-    border-radius: 0.25rem;
-    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    color: rgb(255, 255, 255);
-    background-color: rgb(98 134 173);
-    box-shadow: none;
-    border-color: rgb(98 134 173);
-    cursor: pointer;
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  user-select: none;
+  font-size: 1rem;
+  border-width: 1px;
+  border-style: solid;
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  color: rgb(255, 255, 255);
+  background-color: rgb(98 134 173);
+  box-shadow: none;
+  border-color: rgb(98 134 173);
+  cursor: pointer;
 }
 .range-filter-btn:hover {
-    background-color: rgb(78 114 147);
-    border-color: rgb(78 114 147);
+  background-color: rgb(78 114 147);
+  border-color: rgb(78 114 147);
 }
 .range-filter-btn:focus {
-    outline: none;
+  outline: none;
 }
 
 .range-filter-btn-group {
-    display: flex;
-    gap: 10px;
+  display: flex;
+  gap: 10px;
 }
 
 /* ==== for grappelli specific layout ==== */
 #grp-filters .range-filter-wrapper {
-    position: relative;
-    width: 220px;
-    max-width: 100%;
-    min-width: auto !important;
+  position: relative;
+  width: 220px;
+  max-width: 100%;
+  min-width: auto !important;
 }
 
 #grp-filters .range-filter-dropdown {
-    left: 0;
-    right: auto;
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
+  left: 0;
+  right: auto;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
-#grp-filters .range-filter-trigger  {
-    margin: 0;
-    padding: 6px 10px 6px 10px;
+#grp-filters .range-filter-trigger {
+  margin: 0;
+  padding: 6px 10px 6px 10px;
 }
 
 #grp-filters .range-filter-dropdown .range-filter-btn {
-    white-space: nowrap;
-    margin: 0;
-    width: unset;
+  white-space: nowrap;
+  margin: 0;
+  width: unset;
 }
