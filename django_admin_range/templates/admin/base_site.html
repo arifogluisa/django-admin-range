@@ -1,0 +1,8 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block extrahead %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'django_admin_range/css/range_filter.css' %}">
+    <script src="{% static 'django_admin_range/js/range_filter.js' %}"></script>
+{% endblock %}

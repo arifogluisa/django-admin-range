@@ -166,12 +166,13 @@ def date_range_filter(field_name: str, title: Union[str, None] = None):
 
             # Prefer explicit title, else model field verbose_name, else fallback
             if title:
-                self.title = title
+                self.title = title.title()
             else:
-                self.title = (
-                    getattr(field, "verbose_name", None)
-                    or field_name.replace("_", " ").title()
-                )
+                verbose_name = getattr(field, "verbose_name", None)
+                if verbose_name:
+                    self.title = verbose_name.title()
+                else:
+                    self.title = field_name.replace("_", " ").title()
 
             super().__init__(request, params, model, model_admin)
 
@@ -325,7 +326,7 @@ class DateTimeRangeFilter(admin.SimpleListFilter):
                 return ""
             if settings.USE_TZ and timezone.is_aware(dt):
                 dt = timezone.localtime(dt)
-            return dt.strftime("%Y-%m-%d, %H:%M")
+            return dt.strftime("%d-%m-%y %H:%M")
 
         datetime_gte_display = _fmt(self.parsed_datetime_gte)
         datetime_lte_display = _fmt(self.parsed_datetime_lte)
@@ -379,12 +380,13 @@ def datetime_range_filter(field_name: str, title: Union[str, None] = None):
                 )
 
             if title:
-                self.title = title
+                self.title = title.title()
             else:
-                self.title = (
-                    getattr(field, "verbose_name", None)
-                    or field_name.replace("_", " ").title()
-                )
+                verbose_name = getattr(field, "verbose_name", None)
+                if verbose_name:
+                    self.title = verbose_name.title()
+                else:
+                    self.title = field_name.replace("_", " ").title()
 
             super().__init__(request, params, model, model_admin)
 
@@ -535,12 +537,13 @@ def numeric_range_filter(field_name: str, title: Union[str, None] = None):
                 )
 
             if title:
-                self.title = title
+                self.title = title.title()
             else:
-                self.title = (
-                    getattr(field, "verbose_name", None)
-                    or field_name.replace("_", " ").title()
-                )
+                verbose_name = getattr(field, "verbose_name", None)
+                if verbose_name:
+                    self.title = verbose_name.title()
+                else:
+                    self.title = field_name.replace("_", " ").title()
 
             super().__init__(request, params, model, model_admin)
 
