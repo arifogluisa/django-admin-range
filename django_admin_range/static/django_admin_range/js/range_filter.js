@@ -84,7 +84,11 @@ document.addEventListener("click", function (e) {
   }
 });
 
-document.addEventListener("DOMContentLoaded", function () {
+function initRangeFilter() {
+  // Avoid running twice if the script is loaded multiple times or re-initialised.
+  if (window.__djangoAdminRangeInitialized) return;
+  window.__djangoAdminRangeInitialized = true;
+
   const inputs = document.querySelectorAll(".range-filter-dropdown input");
 
   inputs.forEach(function (input) {
@@ -103,4 +107,11 @@ document.addEventListener("DOMContentLoaded", function () {
       submitRangeFilter(btn);
     });
   });
-});
+}
+
+// Support both normal script loading and late/dynamic injection.
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initRangeFilter);
+} else {
+  initRangeFilter();
+}

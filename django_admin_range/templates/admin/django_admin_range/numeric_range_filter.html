@@ -1,5 +1,20 @@
 {% load i18n static %}
 
+<script>
+    if (!window.RangeFilterFilesLoaded) {
+        window.RangeFilterFilesLoaded = true;
+
+        const script = document.createElement('script');
+        script.src = '{% static "django_admin_range/js/range_filter.js" %}';
+        document.head.appendChild(script);
+    
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = '{% static "django_admin_range/css/range_filter.css" %}';
+        document.head.appendChild(link);
+    }
+</script>
+
 {% for choice in choices %}
 <div class="form-group range-filter-wrapper" id="wrapper_{{ choice.field_name }}">
     <button type="button"
