@@ -62,7 +62,7 @@ class InvoiceAdmin(admin.ModelAdmin):
 That is it. The admin changelist will render the range controls and load the package's CSS/JS automatically.
 
 ## License
-Released under [MIT License](LICENSE).
+Released under [MIT License](https://github.com/arifogluisa/django-admin-range/blob/master/LICENSE).
 
 ## Supporting
 
