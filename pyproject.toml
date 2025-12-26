@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "django-admin-range"
-version = "0.1.7"
+version = "0.1.8"
 description = "Reusable date, datetime, and numeric range filters for Django admin in new UI style. Compatible with Django's default admin, Jazzmin, and Grappelli admin interfaces."
 readme = "README.md"
 requires-python = ">=3.9"
